@@ -17,6 +17,8 @@ This repository provides PG&E feed-in rate data in JSON format for use with ener
   - `PG&E NBT EEC Values 2025 Vintage.csv.zip`: Solar Billing Plan Customers with applications filed in 2025 that qualify for 9-year lock-in export rates
   - `NBT24-2025-only.csv`: Extracted 2025 rates for Solar Billing Plan Customers with applications filed in 2024
   - `NBT25-2025-only.csv`: Extracted 2025 rates for Solar Billing Plan Customers with applications filed in 2025
+  - `NBT25-2026-only.csv`: Extracted 2026 rates for Solar Billing Plan Customers with applications filed in 2025
+  - `NBT25-2027-only.csv`: Extracted 2027 rates for Solar Billing Plan Customers with applications filed in 2025
 
 ## Understanding PG&E Feed-in Rates
 
@@ -46,8 +48,10 @@ tariffs:
 ```
 
 2. Choose the correct JSON file based on your solar activation year:
-   - `NBT24-feed-in-rates.json` for 2024 activations
-   - `NBT25-feed-in-rates.json` for 2025 activations
+   - `/2025/NBT24-feed-in-rates.json` 2025 rates for Solar Billing Plan Customers with applications filed in 2024
+   - `/2025/NBT25-feed-in-rates.json` 2025 rates for Solar Billing Plan Customers with applications filed in 2025
+   - `/2026/NBT25-feed-in-rates.json` 2026 rates for Solar Billing Plan Customers with applications filed in 2025
+   - `/2027/NBT25-feed-in-rates.json` 2027 rates for Solar Billing Plan Customers with applications filed in 2025
 
 EVCC will pull this data hourly to optimize your energy usage based on the current feed-in rates.
 
@@ -68,6 +72,10 @@ If you need to convert rates for a different vintage year or future calendar yea
 PG&E is required to provide 20-years of export rates. However please note that NBT23, NBT24, NBT25, and NBT26 vintage customers are only guaranteed export rates for 9-years from the Permission-To-Operate (PTO) date of your system. Any rate factors in this file beyond the  9-year lock-in period are for illustrative purposes only and are not actual effective SBP Export Rates at those times. 
 
 Feel free to use these files in your own energy management system. The data is pulled directly from PG&E's official rate files, which are legally required to be publicly available.
+
+## Note
+
+I didn’t initially think to generalize my script for generating a 9-year rate plan for all PG&E NBT EEC values. I mostly figured things out on the fly while writing a quick script and, to be honest, I’m not too motivated to generate 9-year rate plans—even for myself—since PG&E will likely push me into a new plan that changes my rates anyway! It’s absurd how unnecessarily complicated this all is. So frustrating!
 
 ## Disclaimer
 
