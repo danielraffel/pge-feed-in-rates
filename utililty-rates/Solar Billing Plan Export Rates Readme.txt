@@ -1,8 +1,8 @@
 Understanding Export Pricing:
 
 This file contains 20-years of hourly export rates for five sets of PG&E Solar Billing Plan vintages (i.e. Net Billing Tariff / NBT), NBT23,NBT24, NBT25, NBT26, and NBT00. 
--	NBT23 = Solar Billing Plan Customers with applications filed in 2025 that qualify for 9-year lock-in export rates
--	NBT24 = Solar Billing Plan Customers with applications filed in 2025 that qualify for 9-year lock-in export rates
+-	NBT23 = Solar Billing Plan Customers with applications filed in 2023 that qualify for 9-year lock-in export rates
+-	NBT24 = Solar Billing Plan Customers with applications filed in 2024 that qualify for 9-year lock-in export rates
 -	NBT25 = Solar Billing Plan Customers with applications filed in 2025 that qualify for 9-year lock-in export rates
 -	NBT26 = Solar Billing Plan Customers with applications filed in 2026 that qualify for 9-year lock-in export rates.
 -	NBT00 = Solar Billing Plan Customers that do not qualify for any 9-year lock-in export rates.
