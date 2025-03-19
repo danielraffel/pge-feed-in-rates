@@ -73,9 +73,13 @@ PG&E is required to provide 20-years of export rates. However please note that N
 
 Feel free to use these files in your own energy management system. The data is pulled directly from PG&E's official rate files, which are legally required to be publicly available.
 
-## Note
+## Note on this Repositoy
 
-I didn’t initially think to generalize my script for generating a 9-year rate plan for all PG&E NBT EEC values. I mostly figured things out on the fly while writing a quick script and, to be honest, I’m not too motivated to generate 9-year rate plans—even for myself—since PG&E will likely push me into a new plan that changes my rates anyway! It’s absurd how unnecessarily complicated this all is. So frustrating!
+I didn’t initially think to generalize my script for generating a 9-year rate plan for all PG&E NBT EEC values. I sorta figured out how this data was organized on the fly while writing a quick script and, to be honest, I’m not too motivated to generate 9-year rate plans—even for myself—since PG&E will likely push me into a new plan that changes my rates anyway! It’s absurd how unnecessarily complicated this all is. So frustrating!
+
+## Appendix
+
+If you are interested in the original source of the PG&E data you can find it [here](https://www.pge.com/assets/pge/docs/vanities/PGE-Solar-Billing-Plan-Export-Rates.zip). As if this wasn’t already confusing enough, the original PG&E README text appears to have errors in its description of the PG&E NBT EEC Vintage files. I’ve corrected these in my version hosted here.
 
 ## Disclaimer
 
