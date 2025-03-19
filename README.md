@@ -1,24 +1,26 @@
 # PG&E Feed-in Rates
 
-This repository provides PG&E feed-in rate data in JSON format for use with energy management systems like [EVCC](https://evcc.io). The data is particularly useful for PG&E solar customers who want to optimize their energy usage based on the rates they receive when exporting energy back to the grid.
+This repository provides PG&E feed-in rate data in JSON format for use with energy management systems like [EVCC](https://evcc.io). The data is particularly useful for PG&E solar customers who want to track their energy usage based on the rates they receive when exporting energy back to the grid.
 
 ## Repository Structure
 
-- **`2025/`**: This folder contains JSON files with feed-in rates specifically for the 2025 calendar year. Each file is structured to match EVCC’s expected format, ensuring seamless integration with the [EVCC Custom Plugin](https://docs.evcc.io/en/docs/tariffs#custom-plugin).
-  - `NBT24-feed-in-rates.json`: For customers who activated solar in 2024
-  - `NBT25-feed-in-rates.json`: For customers who activated solar in 2025
+- **`2025/`**: This folder contains JSON files with feed-in rates specifically for the 2025 calendar year. Each file is structured to match EVCC's expected format, ensuring seamless integration with the [EVCC Custom Plugin](https://docs.evcc.io/en/docs/tariffs#custom-plugin).
+  - `NBT23-generation-feed-in-rates.json`: Generation rates for customers who activated solar in 2023
+  - `NBT23-delivery-feed-in-rates.json`: Delivery rates for customers who activated solar in 2023
+  - `NBT24-generation-feed-in-rates.json`: Generation rates for customers who activated solar in 2024
+  - `NBT24-delivery-feed-in-rates.json`: Delivery rates for customers who activated solar in 2024
+  - `NBT25-generation-feed-in-rates.json`: Generation rates for customers who activated solar in 2025
+  - `NBT25-delivery-feed-in-rates.json`: Delivery rates for customers who activated solar in 2025
 
 - **`scripts/`**: Contains utilities for converting PG&E CSV rate files to JSON
   - `convert_rates.py`: Python script to convert PG&E CSV rate files to EVCC-compatible JSON format
 
-- **`utility-rates/`**: Contains the original and processed PG&E rate files
+- **`utility-rates/`**: Contains the original PG&E rate files
   - `Solar Billing Plan Export Rates Readme.txt`: PG&E's documentation explaining their rate files
+  - `PG&E NBT EEC Values 2023 Vintage.csv.zip`: Solar Billing Plan Customers with applications filed in 2023 that qualify for 9-year lock-in export rates
   - `PG&E NBT EEC Values 2024 Vintage.csv.zip`: Solar Billing Plan Customers with applications filed in 2024 that qualify for 9-year lock-in export rates
   - `PG&E NBT EEC Values 2025 Vintage.csv.zip`: Solar Billing Plan Customers with applications filed in 2025 that qualify for 9-year lock-in export rates
-  - `NBT24-2025-only.csv`: Extracted 2025 rates for Solar Billing Plan Customers with applications filed in 2024
-  - `NBT25-2025-only.csv`: Extracted 2025 rates for Solar Billing Plan Customers with applications filed in 2025
-  - `NBT25-2026-only.csv`: Extracted 2026 rates for Solar Billing Plan Customers with applications filed in 2025
-  - `NBT25-2027-only.csv`: Extracted 2027 rates for Solar Billing Plan Customers with applications filed in 2025
+  - `PG&E NBT EEC Values 2026 Vintage.csv.zip`: Solar Billing Plan Customers with applications filed in 2026 that qualify for 9-year lock-in export rates
 
 ## Understanding PG&E Feed-in Rates
 
@@ -28,8 +30,18 @@ PG&E's Net Billing Tariff (NBT) provides compensation for solar customers when t
 - **Time of Day**: Export rates vary throughout the day based on demand
 - **Day Type**: Different rates for weekdays vs. weekends/holidays
 - **Month**: Seasonal variations in rates
+- **Rate Type**: Generation rates vs. Delivery rates
 
-The "NBT" number (NBT24, NBT25, etc.) represents the vintage year of the rate plan. For example, if you activated your solar system in 2024, you would use the NBT24 rates.
+The "NBT" number (NBT23, NBT24, etc.) represents the vintage year of the rate plan. For example, if you activated your solar system in 2024, you would use the NBT24 rates.
+
+### Generation vs. Delivery Rates
+
+PG&E's rate files distinguish between two types of feed-in rates:
+
+- **Generation Rates**: These rates (identified by "USCA-XXPG" in PG&E's rate files) represent compensation for the energy you generate and export to the grid.
+- **Delivery Rates**: These rates (identified by "USCA-PGXX" in PG&E's rate files) account for the delivery component of your exported energy.
+
+For most home solar customers, the generation rates are typically the most relevant for calculating export compensation.
 
 ## Using with EVCC
 
@@ -44,14 +56,16 @@ tariffs:
     type: custom
     forecast:
       source: http
-      uri: https://raw.githubusercontent.com/danielraffel/pge-feed-in-rates/refs/heads/main/2025/NBT24-feed-in-rates.json
+      uri: https://raw.githubusercontent.com/danielraffel/pge-feed-in-rates/refs/heads/main/2025/NBT24-generation-feed-in-rates.json
 ```
 
-2. Choose the correct JSON file based on your solar activation year:
-   - `/2025/NBT24-feed-in-rates.json` 2025 rates for Solar Billing Plan Customers with applications filed in 2024
-   - `/2025/NBT25-feed-in-rates.json` 2025 rates for Solar Billing Plan Customers with applications filed in 2025
-   - `/2026/NBT25-feed-in-rates.json` 2026 rates for Solar Billing Plan Customers with applications filed in 2025
-   - `/2027/NBT25-feed-in-rates.json` 2027 rates for Solar Billing Plan Customers with applications filed in 2025
+2. Choose the correct JSON file for your current rate based on your solar activation year and whether you want generation vs delivery rates:
+   * `/2025/NBT23-delivery-feed-in-rates.json`: 2025 delivery rates for Solar Billing Plan Customers with applications filed in 2023
+   * `/2025/NBT23-generation-feed-in-rates.json`: 2025 generation rates for Solar Billing Plan Customers with applications filed in 2023
+   * `/2025/NBT24-delivery-feed-in-rates.json`: 2025 delivery rates for Solar Billing Plan Customers with applications filed in 2024
+   * `/2025/NBT24-generation-feed-in-rates.json`: 2025 generation rates for Solar Billing Plan Customers with applications filed in 2024
+   * `/2025/NBT25-delivery-feed-in-rates.json`: 2025 delivery rates for Solar Billing Plan Customers with applications filed in 2025
+   * `/2025/NBT25-generation-feed-in-rates.json`: 2025 generation rates for Solar Billing Plan Customers with applications filed in 2025
 
 EVCC will pull this data hourly to optimize your energy usage based on the current feed-in rates.
 
@@ -59,27 +73,24 @@ EVCC will pull this data hourly to optimize your energy usage based on the curre
 
 If you need to convert rates for a different vintage year or future calendar years, you can use the provided Python script:
 
-1. Place your PG&E CSV file in the same directory as the python script
-2. Rename the CSV file to `2025.csv` (or modify the script to use your filename)
-3. Run the script:
+1. Place your PG&E CSV file in the same directory as the Python script. The script assumes the file is named something like `PG&E NBT EEC Values 2024 Vintage.csv`.
+2. Run the script:
    ```
    python convert_rates.py
    ```
-4. The script will generate a `feed-in-rates.json` file in the same directory
+3. The script will automatically process all PG&E NBT EEC Values CSV files in the directory, creating both generation and delivery rate JSON files organized by year
+
+The script will create separate JSON files for generation and delivery rates, with appropriate naming to reflect the vintage year and rate type.
 
 ## About the Rate Files
 
-PG&E is required to provide 20-years of export rates. However please note that NBT23, NBT24, NBT25, and NBT26 vintage customers are only guaranteed export rates for 9-years from the Permission-To-Operate (PTO) date of your system. Any rate factors in this file beyond the  9-year lock-in period are for illustrative purposes only and are not actual effective SBP Export Rates at those times. 
+PG&E is required to provide 20-years of export rates. However please note that NBT23, NBT24, NBT25, and NBT26 vintage customers are only guaranteed export rates for 9-years from the Permission-To-Operate (PTO) date of your system. Any rate factors in this file beyond the 9-year lock-in period are for illustrative purposes only and are not actual effective SBP Export Rates at those times. 
 
-Feel free to use these files in your own energy management system. The data is pulled directly from PG&E's official rate files, which are legally required to be publicly available.
-
-## Note on this Repositoy
-
-I didn’t initially think to generalize my script for generating a 9-year rate plan for all PG&E NBT EEC values. I sorta figured out how this data was organized on the fly while writing a quick script and, to be honest, I’m not too motivated to generate 9-year rate plans—even for myself—since PG&E will likely push me into a new plan that changes my rates anyway! It’s absurd how unnecessarily complicated this all is. So frustrating!
+Feel free to use these files in your own energy management system. The data is pulled directly from [PG&E's official rate files](https://www.pge.com/assets/pge/docs/vanities/PGE-Solar-Billing-Plan-Export-Rates.zip), which are legally required to be publicly available.
 
 ## Appendix
 
-If you are interested in the original source of the PG&E data you can find it [here](https://www.pge.com/assets/pge/docs/vanities/PGE-Solar-Billing-Plan-Export-Rates.zip). As if this wasn’t already confusing enough, the original PG&E README text appears to have errors in its description of the PG&E NBT EEC Vintage files. I’ve corrected these in my version hosted here.
+As if this wasn't already confusing enough, the original PG&E README text appears to have errors in its description of the PG&E NBT EEC Vintage files. I've corrected these in my version hosted here.
 
 ## Disclaimer
 
