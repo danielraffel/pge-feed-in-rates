@@ -108,7 +108,7 @@ If you need to convert rates for a different vintage year or future calendar yea
    ```
 3. The script will automatically process all PG&E NBT EEC Values CSV files in the directory, creating both generation and delivery rate JSON files organized by year
 
-The script will create separate JSON files for generation and delivery rates, with appropriate naming to reflect the vintage year and rate type. Note that the script has been optimized to create 9 years of data for customers who activated in 2024, and some vintage years will have more rate data, while 2026 vintage customers will only have 8 years of data available.
+The script will create separate JSON files for generation and delivery rates, with appropriate naming to reflect the vintage year and rate type. Note that the script was written quickly and was optimized to create 9 years of data for customers who activated in 2024, and some vintage years will have more rate data, while 2025 vintage customers will have access to only 8 years of data, and 2026 vintage customers will have only 7 years available.
 
 ## About the Rate Files
 
