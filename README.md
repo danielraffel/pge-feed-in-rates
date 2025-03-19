@@ -5,30 +5,30 @@ This repository provides PG&E feed-in rate data in JSON format for use with ener
 ## Repository Structure
 
 - **`2025/`**: This folder contains JSON files with feed-in rates specifically for the 2025 calendar year. Similar folders exist for each year from 2025 to 2033, ensuring a multi-year dataset. Each file is structured to match EVCC's expected format, ensuring seamless integration with the [EVCC Custom Plugin](https://docs.evcc.io/en/docs/tariffs#custom-plugin).
-  - `NBT23-generation-feed-in-rates.json`: Generation rates for customers who activated solar in 2023
-  - `NBT23-delivery-feed-in-rates.json`: Delivery rates for customers who activated solar in 2023
-  - `NBT24-generation-feed-in-rates.json`: Generation rates for customers who activated solar in 2024
-  - `NBT24-delivery-feed-in-rates.json`: Delivery rates for customers who activated solar in 2024
-  - `NBT25-generation-feed-in-rates.json`: Generation rates for customers who activated solar in 2025
-  - `NBT25-delivery-feed-in-rates.json`: Delivery rates for customers who activated solar in 2025
-  - `NBT26-generation-feed-in-rates.json`: Generation rates for customers who activated solar in 2026
-  - `NBT26-delivery-feed-in-rates.json`: Delivery rates for customers who activated solar in 2026
+  - [NBT23-generation-feed-in-rates.json](2025/NBT23-generation-feed-in-rates.json): Generation rates for customers who activated solar in 2023
+  - [NBT23-delivery-feed-in-rates.json](2025/NBT23-delivery-feed-in-rates.json): Delivery rates for customers who activated solar in 2023
+  - [NBT24-generation-feed-in-rates.json](2025/NBT24-generation-feed-in-rates.json): Generation rates for customers who activated solar in 2024
+  - [NBT24-delivery-feed-in-rates.json](2025/NBT24-delivery-feed-in-rates.json): Delivery rates for customers who activated solar in 2024
+  - [NBT25-generation-feed-in-rates.json](2025/NBT25-generation-feed-in-rates.json): Generation rates for customers who activated solar in 2025
+  - [NBT25-delivery-feed-in-rates.json](2025/NBT25-delivery-feed-in-rates.json): Delivery rates for customers who activated solar in 2025
+  - [NBT26-generation-feed-in-rates.json](2025/NBT26-generation-feed-in-rates.json): Generation rates for customers who activated solar in 2026
+  - [NBT26-delivery-feed-in-rates.json](2025/NBT26-delivery-feed-in-rates.json): Delivery rates for customers who activated solar in 2026
 
 - **`2025-2033/`**: This folder contains comprehensive JSON files with feed-in rates spanning from 2025 to 2033. These files combine multiple years of data into a single file for convenience.
-  - `NBT23-delivery-feed-in-rates.json`: Complete 9-year delivery rates for 2023 vintage customers
-  - `NBT23-generation-feed-in-rates.json`: Complete 9-year generation rates for 2023 vintage customers
-  - `NBT24-delivery-feed-in-rates.json`: Complete 9-year delivery rates for 2024 vintage customers
-  - `NBT24-generation-feed-in-rates.json`: Complete 9-year generation rates for 2024 vintage customers
-  - `NBT25-delivery-feed-in-rates.json`: Complete 9-year delivery rates for 2025 vintage customers
-  - `NBT25-generation-feed-in-rates.json`: Complete 9-year generation rates for 2025 vintage customers
-  - `NBT26-delivery-feed-in-rates.json`: 8-year delivery rates for 2026 vintage customers
-  - `NBT26-generation-feed-in-rates.json`: 8-year generation rates for 2026 vintage customers
+  - [NBT23-delivery-feed-in-rates.json](2025-2033/NBT23-delivery-feed-in-rates.json): Complete 9-year delivery rates for 2023 vintage customers
+  - [NBT23-generation-feed-in-rates.json](2025-2033/NBT23-generation-feed-in-rates.json): Complete 9-year generation rates for 2023 vintage customers
+  - [NBT24-delivery-feed-in-rates.json](2025-2033/NBT24-delivery-feed-in-rates.json): Complete 9-year delivery rates for 2024 vintage customers
+  - [NBT24-generation-feed-in-rates.json](2025-2033/NBT24-generation-feed-in-rates.json): Complete 9-year generation rates for 2024 vintage customers
+  - [NBT25-delivery-feed-in-rates.json](2025-2033/NBT25-delivery-feed-in-rates.json): Complete 9-year delivery rates for 2025 vintage customers
+  - [NBT25-generation-feed-in-rates.json](2025-2033/NBT25-generation-feed-in-rates.json): Complete 9-year generation rates for 2025 vintage customers
+  - [NBT26-delivery-feed-in-rates.json](2025-2033/NBT26-delivery-feed-in-rates.json): 8-year delivery rates for 2026 vintage customers
+  - [NBT26-generation-feed-in-rates.json](2025-2033/NBT26-generation-feed-in-rates.json): 8-year generation rates for 2026 vintage customers
 
 - **`scripts/`**: Contains a python script for converting PG&E CSV rate files to JSON
-  - `convert_rates.py`: Python script to convert PG&E CSV rate files to EVCC-compatible JSON format
+  - [convert_rates.py](scripts/convert_rates.py): Python script to convert PG&E CSV rate files to EVCC-compatible JSON format
 
 - **`utility-rates/`**: Contains the original PG&E rate files
-  - `Solar Billing Plan Export Rates Readme.txt`: PG&E's documentation explaining their rate files
+  - [Solar Billing Plan Export Rates Readme.txt](https://github.com/danielraffel/pge-feed-in-rates/blob/main/utililty-rates/Solar%20Billing%20Plan%20Export%20Rates%20Readme.txt): PG&E's documentation explaining their rate files
   - `PG&E NBT EEC Values 2023 Vintage.csv.zip`: Solar Billing Plan (SBP) Customers with applications filed in 2023 that qualify for 9-year lock-in export rates
   - `PG&E NBT EEC Values 2024 Vintage.csv.zip`: SBP Customers with applications filed in 2024 that qualify for 9-year lock-in export rates
   - `PG&E NBT EEC Values 2025 Vintage.csv.zip`: SBP Customers with applications filed in 2025 that qualify for 9-year lock-in export rates
