@@ -11,8 +11,6 @@ This repository provides PG&E feed-in rate data in JSON format for use with ener
   - [NBT24-delivery-feed-in-rates.json](2025/NBT24-delivery-feed-in-rates.json): Delivery rates for customers who activated solar in 2024
   - [NBT25-generation-feed-in-rates.json](2025/NBT25-generation-feed-in-rates.json): Generation rates for customers who activated solar in 2025
   - [NBT25-delivery-feed-in-rates.json](2025/NBT25-delivery-feed-in-rates.json): Delivery rates for customers who activated solar in 2025
-  - [NBT26-generation-feed-in-rates.json](2025/NBT26-generation-feed-in-rates.json): Generation rates for customers who activated solar in 2026
-  - [NBT26-delivery-feed-in-rates.json](2025/NBT26-delivery-feed-in-rates.json): Delivery rates for customers who activated solar in 2026
 
 - **`2025-2033/`**: This folder contains comprehensive JSON files with feed-in rates spanning from 2025 to 2033. These files combine multiple years of data into a single file for convenience.
   - [NBT23-delivery-feed-in-rates.json](2025-2033/NBT23-delivery-feed-in-rates.json): Complete 9-year delivery rates for 2023 vintage customers
@@ -73,27 +71,7 @@ tariffs:
       uri: https://raw.githubusercontent.com/danielraffel/pge-feed-in-rates/refs/heads/main/2025/NBT24-generation-feed-in-rates.json
 ```
 
-2. Choose the correct JSON file for your current rate based on your solar activation year and whether you want generation vs delivery rates:
-   
-   **For specific year rates (2025):**
-   * `/2025/NBT23-delivery-feed-in-rates.json`: 2025 delivery rates for SBP Customers with applications filed in 2023
-   * `/2025/NBT23-generation-feed-in-rates.json`: 2025 generation rates for SBP Customers with applications filed in 2023
-   * `/2025/NBT24-delivery-feed-in-rates.json`: 2025 delivery rates for SBP Customers with applications filed in 2024
-   * `/2025/NBT24-generation-feed-in-rates.json`: 2025 generation rates for SBP Customers with applications filed in 2024
-   * `/2025/NBT25-delivery-feed-in-rates.json`: 2025 delivery rates for SBP Customers with applications filed in 2025
-   * `/2025/NBT25-generation-feed-in-rates.json`: 2025 generation rates for SBP Customers with applications filed in 2025
-   * `/2025/NBT26-delivery-feed-in-rates.json`: 2025 delivery rates for SBP Customers with applications filed in 2026
-   * `/2025/NBT26-generation-feed-in-rates.json`: 2025 generation rates for SBP Customers with applications filed in 2026
-   
-   **For comprehensive multi-year rates (2025-2033):**
-   * `/2025-2033/NBT23-delivery-feed-in-rates.json`: Complete 9-year delivery rates for 2023 vintage customers
-   * `/2025-2033/NBT23-generation-feed-in-rates.json`: Complete 9-year generation rates for 2023 vintage customers
-   * `/2025-2033/NBT24-delivery-feed-in-rates.json`: Complete 9-year delivery rates for 2024 vintage customers
-   * `/2025-2033/NBT24-generation-feed-in-rates.json`: Complete 9-year generation rates for 2024 vintage customers
-   * `/2025-2033/NBT25-delivery-feed-in-rates.json`: Complete 9-year delivery rates for 2025 vintage customers
-   * `/2025-2033/NBT25-generation-feed-in-rates.json`: Complete 9-year generation rates for 2025 vintage customers
-   * `/2025-2033/NBT26-delivery-feed-in-rates.json`: 8-year delivery rates for 2026 vintage customers
-   * `/2025-2033/NBT26-generation-feed-in-rates.json`: 8-year generation rates for 2026 vintage customers
+2. Choose the correct JSON file for your current rate based on your solar activation year and whether you want generation vs delivery rates. The above configuration links to the JSON file containing 2025 hourly rates for an SBP customer who activated solar in 2024 and wants their generation feed-in rates.
 
 EVCC will pull this data hourly to optimize your energy usage based on the current feed-in rates.
 
