@@ -150,6 +150,121 @@ def process_csv_row(row):
         print(f"Warning: Could not parse row: {row}. Error: {e}")
         return None, None, None, None
 
+def generate_total_feed_in_rates(vintage_year, start_year, end_year, output_dir=None):
+    """
+    Generate total feed-in rate JSON files by summing generation and delivery rates.
+    
+    Args:
+        vintage_year: The vintage year as a string (e.g., "24" for NBT24)
+        start_year: The start year of the range
+        end_year: The end year of the range
+        output_dir: Directory where the JSON files are stored (default: current directory)
+    """
+    # Default output directory
+    if output_dir is None:
+        output_dir = ""
+    
+    # Archives directory for comprehensive files
+    archives_dir = os.path.join(output_dir, "archives")
+    if not os.path.exists(archives_dir):
+        os.makedirs(archives_dir)
+    
+    # Dictionary to store total rates by year and time key
+    total_data = defaultdict(dict)  # {year: {time_key: entry}}
+    
+    # Process each year within the range
+    for year in range(start_year, end_year + 1):
+        # Create year-specific directory if it doesn't exist
+        year_dir = os.path.join(output_dir, str(year))
+        if not os.path.exists(year_dir):
+            os.makedirs(year_dir)
+        
+        # Paths to the generation and delivery JSON files for this year
+        gen_file = os.path.join(year_dir, f"NBT{vintage_year}-generation-feed-in-rates.json")
+        del_file = os.path.join(year_dir, f"NBT{vintage_year}-delivery-feed-in-rates.json")
+        
+        # Load generation rates if file exists
+        gen_rates = {}
+        if os.path.exists(gen_file):
+            try:
+                with open(gen_file, 'r') as f:
+                    gen_entries = json.load(f)
+                    for entry in gen_entries:
+                        time_key = f"{entry['start']}_{entry['end']}"
+                        gen_rates[time_key] = entry
+            except Exception as e:
+                print(f"Warning: Could not load generation rates from {gen_file}: {e}")
+        
+        # Load delivery rates if file exists
+        del_rates = {}
+        if os.path.exists(del_file):
+            try:
+                with open(del_file, 'r') as f:
+                    del_entries = json.load(f)
+                    for entry in del_entries:
+                        time_key = f"{entry['start']}_{entry['end']}"
+                        del_rates[time_key] = entry
+            except Exception as e:
+                print(f"Warning: Could not load delivery rates from {del_file}: {e}")
+        
+        # If neither file exists, skip this year
+        if not gen_rates and not del_rates:
+            print(f"Skipping year {year}: No generation or delivery rates found")
+            continue
+        
+        # Combine the time keys from both sets of rates
+        all_time_keys = set(gen_rates.keys()) | set(del_rates.keys())
+        
+        # Generate total rates for this year
+        for time_key in all_time_keys:
+            # Extract the start and end timestamps
+            start_time, end_time = time_key.split('_')
+            
+            # Get the generation and delivery prices (default to 0.0 if not found)
+            gen_price = gen_rates[time_key]['price'] if time_key in gen_rates else 0.0
+            del_price = del_rates[time_key]['price'] if time_key in del_rates else 0.0
+            
+            # Sum the prices
+            total_price = gen_price + del_price
+            
+            # Create the entry
+            entry = {
+                'start': start_time,
+                'end': end_time,
+                'price': total_price
+            }
+            
+            # Store the entry by year and time key
+            entry_year = int(start_time.split('-')[0])  # Extract year from timestamp
+            total_data[entry_year][time_key] = entry
+        
+        # Create the year-specific total rates file
+        if year in total_data and total_data[year]:
+            year_total_entries = list(total_data[year].values())
+            year_total_entries.sort(key=lambda x: x['start'])
+            
+            year_total_file = os.path.join(year_dir, f"NBT{vintage_year}-total-feed-in-rates.json")
+            
+            with open(year_total_file, 'w') as json_file:
+                json.dump(year_total_entries, json_file, indent=2)
+            
+            print(f"Year {year} total feed-in rates file saved to: {os.path.abspath(year_total_file)} ({len(year_total_entries)} entries)")
+    
+    # Create the comprehensive total rates file
+    all_total_entries = []
+    for year_entries in total_data.values():
+        all_total_entries.extend(year_entries.values())
+    
+    if all_total_entries:
+        all_total_entries.sort(key=lambda x: x['start'])
+        total_file = f"NBT{vintage_year}-total-feed-in-rates.json"
+        total_file = os.path.join(archives_dir, total_file)
+        
+        with open(total_file, 'w') as json_file:
+            json.dump(all_total_entries, json_file, indent=2)
+        
+        print(f"Comprehensive total feed-in rates file saved to: {os.path.abspath(total_file)} ({len(all_total_entries)} entries)")
+
 def csv_to_json(csv_file_path, output_dir=None):
     """
     Convert a CSV file with utility rates to JSON format for EVCC feed-in rates.
@@ -327,6 +442,9 @@ def csv_to_json(csv_file_path, output_dir=None):
                 json.dump(year_del_entries, json_file, indent=2)
             
             print(f"Year {year} delivery file saved to: {os.path.abspath(year_del_file)} ({len(year_del_entries)} entries)")
+    
+    # Generate total feed-in rate JSON files
+    generate_total_feed_in_rates(vintage_year, start_year, end_year, output_dir)
 
 def extract_from_zip(zip_file_path, temp_dir):
     """
