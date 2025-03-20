@@ -121,7 +121,7 @@ This ensures the script can correctly extract and process the appropriate rate d
 - **NBT26**: 2026-2034 (9 years)
 - Future vintages can be easily added and mapped to appropriate **9-year periods**.
 
-\* **Note**: NBT23 and NBT24 only generate files starting from **2025 onward**.
+\* **Note**: NBT23 and NBT24 only generate files starting from **2024 onward**.
 
 ## About the Source Data
 
