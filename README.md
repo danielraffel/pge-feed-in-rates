@@ -84,25 +84,46 @@ Select the JSON file that corresponds to your solar activation year and rate typ
 
 ## Converting Your Own Rates
 
+This archive was last updated for **PG&E Solar Billing Plan rates offered in 2025**, and all data generated is shared in this repository. While running the script **should not be necessary** to access data circa 2025, you may want to run it with future data. 
+
+### Things to Keep in Mind:
+- The script will generate an **output folder** containing the processed files.
+- It expects to be **run in the same directory** as the rate plans and it expects them to be zipped.
+- If both zipped and unzipped CSV files exist, the script prioritizes processing the **zipped files**.
+- It assumes the files 
+
+### Running the Script
 To convert rates for future vintage years or to re-run the conversion:
 
-1. Navigate to the `utility-rates` directory
-2. Run the script: `python convert-rates.py`
+1. Navigate to the `utility-rates` directory.
+2. Run the script:  
+   ```bash
+   python convert-rates.py
+   ```
 
-The script can process both zipped and unzipped CSV files (prioritizing zipped if both exist), and will automatically:
-- Generate files for each vintage according to its appropriate year range
-- Create separate generation and delivery rate JSON files
-- Organize files by year and store comprehensive archives
+### What the Script Does:
+- Generates files for each vintage according to its **appropriate year range**.
+- Creates **separate JSON files** for generation and delivery rates.
+- Organizes files by year and stores **comprehensive archives**.
+- The script expects ZIP files, containing CSV rate plan files, to follow a specific naming convention used by PG&E. Each ZIP file includes a single CSV file inside. The expected format is:
+```
+• PG&E NBT EEC Values Floating Vintage.csv.zip  
+• PG&E NBT EEC Values 2025 Vintage.csv.zip  
+• PG&E NBT EEC Values 2026 Vintage.csv.zip  
+```
+This ensures the script can correctly extract and process the appropriate rate data.
 
-The script handles different NBT vintages with appropriate date ranges:
+### NBT Vintage Year Handling:
 - **NBT00 (Floating Vintage)**: 2025-2026 only
 - **NBT23**: 2023-2031 (9 years) *
 - **NBT24**: 2024-2032 (9 years) *
 - **NBT25**: 2025-2033 (9 years)
 - **NBT26**: 2026-2034 (9 years)
-- Future vintages can be easily added and mapped to appropriate 9-year periods
+- Future vintages can be easily added and mapped to appropriate **9-year periods**.
 
-* Note: NBT23 and NBT24 only generate files from 2025 onward
+\* **Note**: NBT23 and NBT24 only generate files starting from **2025 onward**.
+
+---
 
 ## About the Source Data
 
