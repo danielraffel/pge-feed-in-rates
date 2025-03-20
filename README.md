@@ -123,12 +123,7 @@ This ensures the script can correctly extract and process the appropriate rate d
 
 \* **Note**: NBT23 and NBT24 only generate files starting from **2025 onward**.
 
----
-
 ## About the Source Data
-
-- **NBT23, NBT24, NBT25, NBT26**: From `PG&E NBT EEC Values [Year] Vintage.csv.zip` files
-- **NBT00**: From `PG&E NBT EEC Values Floating Vintage.csv.zip`
 
 The original source of the PG&E data is available [here](https://www.pge.com/assets/pge/docs/vanities/PGE-Solar-Billing-Plan-Export-Rates.zip).
 
