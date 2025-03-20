@@ -130,7 +130,7 @@ The original source of the PG&E data is available [here](https://www.pge.com/ass
 
 ## Not Supported
 
-- Net Surplus Compensation Rates are not currently supported. For more information, refer to PG&E's Net Surplus Compensation page and their compensation rate PDF.
+- Net Surplus Compensation Rates are not currently supported. For more information, refer to [PG&E's Net Surplus Compensation page](https://www.pge.com/en/clean-energy/solar/solar-incentives-and-programs/net-surplus-compensation.html) and their [monthly updated compensation rate PDF](https://www.pge.com/assets/pge/docs/clean-energy/solar/AB920-RateTable.pdf).
 
 ## Disclaimer - Use at Your Own Risk
 
