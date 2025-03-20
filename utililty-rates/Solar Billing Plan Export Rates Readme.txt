@@ -5,7 +5,7 @@ This file contains 20-years of hourly export rates for five sets of PG&E Solar B
 -	NBT24 = Solar Billing Plan Customers with applications filed in 2024 that qualify for 9-year lock-in export rates
 -	NBT25 = Solar Billing Plan Customers with applications filed in 2025 that qualify for 9-year lock-in export rates
 -	NBT26 = Solar Billing Plan Customers with applications filed in 2026 that qualify for 9-year lock-in export rates.
--	NBT00 = Solar Billing Plan Customers that do not qualify for any 9-year lock-in export rates.
+-	NBT00 (aka PG&E NBT EEC Values Floating Vintage.csv) = Solar Billing Plan Customers that do not qualify for any 9-year lock-in export rates.
 The dates and times associated with the export rates are presented in UTC time, covering from 1/1/2025 12:00:00am PST, to 12/31/2044 11:59:59pm PST.
 Per CPUC Resolution E-5301, PG&E is required to provide 20-years of export rates. However please note that NBT23, NBT24, NBT25, and NBT26 vintage customers are only guaranteed export rates for 9-years from the Permission-To-Operate (PTO) date of your system. Any rate factors in this file beyond the  9-year lock-in period are for illustrative purposes only and are not actual effective SBP Export Rates at those times. For NBT00 customers, only those rates for Pacific Standard Time calendar year 2025 and 2026 are actual effective rates, and all rates after that are for illustrative purposes only.
 
