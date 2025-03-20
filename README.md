@@ -9,12 +9,12 @@ This repository provides PG&E feed-in rate data in JSON format for use with ener
   - Example: [2025/NBT24-delivery-feed-in-rates.json](2025/NBT24-delivery-feed-in-rates.json)
 
 - **`archives/`**: Contains comprehensive JSON files with complete feed-in rates across all applicable years
-  - Example: [archives/NBT24-generation-feed-in-rates.json](archives/NBT24-generation-feed-in-rates.json)
+  - Example: [archives/NBT24-generation-feed-in-rates.json](https://raw.githubusercontent.com/danielraffel/pge-feed-in-rates/refs/heads/main/archives/NBT24-generation-feed-in-rates.json)
 
 - **`utility-rates/`**: Contains the original PG&E rate files and conversion script
-  - Original PG&E rate files for [NBT23](utility-rates/PG%26E%20NBT%20EEC%20Values%202023%20Vintage.csv.zip), [NBT24](utility-rates/PG%26E%20NBT%20EEC%20Values%202024%20Vintage.csv.zip), [NBT25](utility-ratesPG%26E%20NBT%20EEC%20Values%202025%20Vintage.csv.zip), [NBT26](utility-rates/PG%26E%20NBT%20EEC%20Values%202026%20Vintage.csv.zip), and [NBT00](utility-rates/PG%26E%20NBT%20EEC%20Values%20Floating%20Vintage.csv.zip) (zipped CSV format)
-  - [convert-rates.py](utility-rates/convert-rates.py): Python script to convert PG&E rate files to EVCC-compatible JSON
-  - [Solar Billing Plan Export Rates Readme.txt](utility-rates/Solar%20Billing%20Plan%20Export%20Rates%20Readme.txt): Documentation on PG&E rate files
+  - Original PG&E rate files for [NBT23](https://github.com/danielraffel/pge-feed-in-rates/blob/main/utililty-rates/PG%26E%20NBT%20EEC%20Values%202023%20Vintage.csv.zip), [NBT24](https://github.com/danielraffel/pge-feed-in-rates/blob/main/utililty-rates/PG%26E%20NBT%20EEC%20Values%202024%20Vintage.csv.zip), [NBT25](https://github.com/danielraffel/pge-feed-in-rates/blob/main/utililty-rates/PG%26E%20NBT%20EEC%20Values%202025%20Vintage.csv.zip), [NBT26](https://github.com/danielraffel/pge-feed-in-rates/blob/main/utililty-rates/PG%26E%20NBT%20EEC%20Values%202026%20Vintage.csv.zip), and [NBT00](https://github.com/danielraffel/pge-feed-in-rates/blob/main/utililty-rates/PG%26E%20NBT%20EEC%20Values%20Floating%20Vintage.csv.zip) (zipped CSV format)
+  - [convert-rates.py](https://github.com/danielraffel/pge-feed-in-rates/blob/main/utililty-rates/convert-rates.py): Python script to convert PG&E rate files to EVCC-compatible JSON
+  - [Solar Billing Plan Export Rates Readme.txt](https://github.com/danielraffel/pge-feed-in-rates/blob/main/utililty-rates/Solar%20Billing%20Plan%20Export%20Rates%20Readme.txt): Documentation on PG&E rate files
 
 ## Understanding PG&E Feed-in Rates
 
