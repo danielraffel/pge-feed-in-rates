@@ -8,7 +8,7 @@ This repository provides PG&E feed-in rate data in JSON format for use with ener
   - Example: [2025/NBT24-generation-feed-in-rates.json](2025/NBT24-generation-feed-in-rates.json)
   - Example: [2025/NBT24-delivery-feed-in-rates.json](2025/NBT24-delivery-feed-in-rates.json)
 
-- **archives/](https://github.com/danielraffel/pge-feed-in-rates/tree/main/archives)**: Contains comprehensive JSON files with complete feed-in rates across all applicable years
+- **[archives/](https://github.com/danielraffel/pge-feed-in-rates/tree/main/archives)**: Contains comprehensive JSON files with complete feed-in rates across all applicable years
   - Example: [archives/NBT24-generation-feed-in-rates.json](https://raw.githubusercontent.com/danielraffel/pge-feed-in-rates/refs/heads/main/archives/NBT24-generation-feed-in-rates.json)
 
 - **[utility-rates/](https://github.com/danielraffel/pge-feed-in-rates/tree/main/utililty-rates)`**: Contains the original PG&E rate files and conversion script
