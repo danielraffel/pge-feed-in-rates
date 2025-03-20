@@ -7,14 +7,17 @@ This repository provides PG&E feed-in rate data in JSON format for use with ener
 - **Year folders (e.g., [2025/](https://github.com/danielraffel/pge-feed-in-rates/tree/main/2025), [2026/](https://github.com/danielraffel/pge-feed-in-rates/tree/main/2026), etc.)**: Contains JSON files with feed-in rates for specific calendar years
   - Example: [2025/NBT24-generation-feed-in-rates.json](2025/NBT24-generation-feed-in-rates.json)
   - Example: [2025/NBT24-delivery-feed-in-rates.json](2025/NBT24-delivery-feed-in-rates.json)
+  - Example: [2025/NBT24-total-feed-in-rates.json](2025/NBT24-total-feed-in-rates.json)
 
 - **[archives/](https://github.com/danielraffel/pge-feed-in-rates/tree/main/archives)**: Contains comprehensive JSON files with complete feed-in rates across all applicable years
-  - Example: [archives/NBT24-generation-feed-in-rates.json](https://raw.githubusercontent.com/danielraffel/pge-feed-in-rates/refs/heads/main/archives/NBT24-generation-feed-in-rates.json)
+  - Example: [archives/NBT24-generation-feed-in-rates.json](archives/NBT24-generation-feed-in-rates.json)
+  - Example: [archives/NBT24-delivery-feed-in-rates.json](archives/NBT24-delivery-feed-in-rates.json)
+  - Example: [archives/NBT24-total-feed-in-rates.json](archives/NBT24-total-feed-in-rates.json)
 
-- **[utility-rates/](https://github.com/danielraffel/pge-feed-in-rates/tree/main/utililty-rates)**: Contains the original PG&E rate files and conversion script
-  - Original PG&E rate files for [NBT23](https://github.com/danielraffel/pge-feed-in-rates/blob/main/utililty-rates/PG%26E%20NBT%20EEC%20Values%202023%20Vintage.csv.zip), [NBT24](https://github.com/danielraffel/pge-feed-in-rates/blob/main/utililty-rates/PG%26E%20NBT%20EEC%20Values%202024%20Vintage.csv.zip), [NBT25](https://github.com/danielraffel/pge-feed-in-rates/blob/main/utililty-rates/PG%26E%20NBT%20EEC%20Values%202025%20Vintage.csv.zip), [NBT26](https://github.com/danielraffel/pge-feed-in-rates/blob/main/utililty-rates/PG%26E%20NBT%20EEC%20Values%202026%20Vintage.csv.zip), and [NBT00](https://github.com/danielraffel/pge-feed-in-rates/blob/main/utililty-rates/PG%26E%20NBT%20EEC%20Values%20Floating%20Vintage.csv.zip) (zipped CSV format)
-  - [convert-rates.py](https://github.com/danielraffel/pge-feed-in-rates/blob/main/utililty-rates/convert-rates.py): Python script to convert PG&E rate files to EVCC-compatible JSON
-  - [Solar Billing Plan Export Rates Readme.txt](https://github.com/danielraffel/pge-feed-in-rates/blob/main/utililty-rates/Solar%20Billing%20Plan%20Export%20Rates%20Readme.txt): Documentation on PG&E rate files
+- **`utility-rates/`**: Contains the original PG&E rate files and conversion script
+  - Original PG&E rate files for [NBT23](utility-rates/PG%26E%20NBT%20EEC%20Values%202023%20Vintage.csv.zip), [NBT24](utility-rates/PG%26E%20NBT%20EEC%20Values%202024%20Vintage.csv.zip), [NBT25](utility-ratesPG%26E%20NBT%20EEC%20Values%202025%20Vintage.csv.zip), [NBT26](utility-rates/PG%26E%20NBT%20EEC%20Values%202026%20Vintage.csv.zip), and [NBT00](utility-rates/PG%26E%20NBT%20EEC%20Values%20Floating%20Vintage.csv.zip) (zipped CSV format)
+  - [convert-rates.py](utility-rates/convert-rates.py): Python script to convert PG&E rate files to EVCC-compatible JSON
+  - [Solar Billing Plan Export Rates Readme.txt](utility-rates/Solar%20Billing%20Plan%20Export%20Rates%20Readme.txt): Documentation on PG&E rate files
 
 ## Understanding PG&E Feed-in Rates
 
@@ -22,25 +25,34 @@ PG&E's Net Billing Tariff (NBT) provides compensation for solar customers when t
 
 - **Vintage Year**: The year you activated your solar system (NBT23, NBT24, etc.)
 - **Time of Day**, **Day Type**, and **Month**: Rates vary throughout the day, week, and year
-- **Rate Type**: Generation rates vs. Delivery rates
+- **Rate Type**: Generation rates, Delivery rates, and Total rates (sum of Generation + Delivery)
 
 ### Vintage Years and Rate Guarantees
 
-Per CPUC Resolution E-5301, each NBT vintage has specific guarantees:
+Per [CPUC Resolution E-5301](https://docs.cpuc.ca.gov/PublishedDocs/Published/G000/M521/K257/521257323.PDF), each NBT vintage has specific guarantees:
 
 - **NBT23, NBT24, NBT25, NBT26**: Guaranteed export rates for 9 years from Permission-To-Operate (PTO) date
-- **NBT00 (Floating Vintage)**: Only rates for 2025 and 2026 are actual effective rates
+- **NBT00 (Floating Vintage)**: Only rates for 2025 and 2026 are actual effective rates.
 
 Any rates beyond the guaranteed period are for illustrative purposes only and not actual effective SBP Export Rates.
 
-### Generation vs. Delivery Rates
+### Generation, Delivery, and Total Rates
 
-PG&E provides two types of feed-in rates:
+PG&E provides different types of feed-in rates:
 
 - **Generation Rates** (USCA-XXPG): Compensation for the energy you generate and export
 - **Delivery Rates** (USCA-PGXX): Account for the delivery component of exported energy
+- **Total Rates**: The sum of Generation and Delivery rates, representing complete compensation for bundled customers
 
-For most home solar customers, generation rates are typically most relevant for calculating export compensation.
+#### Which Rate to Use?
+
+- If you're a **bundled PG&E customer** (meaning you get **both** energy generation and delivery from PG&E), your total export compensation is:
+  
+  {Total Export Credit} = {Generation Export Rate} + {Delivery Export Rate}
+  
+  In this case, you should use the **Total Feed-in Rates** files.
+
+- However, if you buy your electricity from a **CCA or Direct Access provider**, PG&E only pays you the **Delivery Export Rate**, and your CCA/DA provider sets its own Generation Export Rate.
 
 ## JSON File Format
 
@@ -59,8 +71,8 @@ The JSON files adhere to [EVCC's Custom Plugin](https://docs.evcc.io/en/docs/tar
 Example:
 ```json
 [
-  { "start": "2025-01-01T00:00:00Z", "end": "2025-01-01T01:00:00Z", "price": 0.05375 },
-  { "start": "2025-01-01T01:00:00Z", "end": "2025-01-01T02:00:00Z", "price": 0.04885 }
+  { "start": "2025-01-01T00:00:00Z", "end": "2025-01-01T01:00:00Z", "price": 0.05685 },
+  { "start": "2025-01-01T01:00:00Z", "end": "2025-01-01T02:00:00Z", "price": 0.05198 }
 ]
 ```
 
@@ -70,6 +82,7 @@ EVCC periodically checks these rates (typically once per hour) to determine the 
 
 These JSON files are formatted for [EVCC's tariff system](https://docs.evcc.io/en/docs/tariffs) for use with the [EVCC Custom Plugin](https://docs.evcc.io/en/docs/tariffs#dynamic-electricity-price). You can link to the appropriate GitHub raw file and add it to your `evcc.yaml` configuration as follows:
 
+For bundled PG&E customers (using Total rates):
 ```yaml
 tariffs:
   currency: USD
@@ -77,56 +90,48 @@ tariffs:
     type: custom
     forecast:
       source: http
-      uri: https://raw.githubusercontent.com/danielraffel/pge-feed-in-rates/refs/heads/main/2025/NBT24-generation-feed-in-rates.json
+      uri: https://raw.githubusercontent.com/danielraffel/pge-feed-in-rates/refs/heads/main/2025/NBT24-total-feed-in-rates.json
 ```
 
-Select the JSON file that corresponds to your solar activation year and rate type. For example, if your solar system was activated in 2024, use the NBT24-generation-feed-in-rates.json file. Adjust the year as needed—this file, for instance, retrieves 2025 rates.
+Select the JSON file that corresponds to your solar activation year and rate type. For example, if your solar system was activated in 2024, use the NBT24 files. Adjust the year as needed—this file, for instance, retrieves 2025 rates.
 
 ## Converting Your Own Rates
 
-This archive was last updated for **PG&E Solar Billing Plan rates offered in 2025**, and all data generated is shared in this repository. While running the script **should not be necessary** to access data circa 2025, you may want to run it with future data. 
-
-### Things to Keep in Mind:
-- The script will generate an **output folder** containing the processed files.
-- It expects to be **run in the same directory** as the rate plans and it expects them to be zipped.
-- If both zipped and unzipped CSV files exist, the script prioritizes processing the **zipped files**.
-- It assumes the files 
-
-### Running the Script
 To convert rates for future vintage years or to re-run the conversion:
 
-1. Navigate to the `utility-rates` directory.
-2. Run the script:  
-   ```bash
-   python convert-rates.py
-   ```
+1. Navigate to the `utility-rates` directory
+2. Run the script: `python convert-rates.py`
 
-### What the Script Does:
-- Generates files for each vintage according to its **appropriate year range**.
-- Creates **separate JSON files** for generation and delivery rates.
-- Organizes files by year and stores **comprehensive archives**.
-- The script expects ZIP files, containing CSV rate plan files, to follow a specific naming convention used by PG&E. Each ZIP file includes a single CSV file inside. The expected format is:
-```
-• PG&E NBT EEC Values Floating Vintage.csv.zip  
-• PG&E NBT EEC Values 2025 Vintage.csv.zip  
-• PG&E NBT EEC Values 2026 Vintage.csv.zip  
-```
-This ensures the script can correctly extract and process the appropriate rate data.
+The script can process both zipped and unzipped CSV files (prioritizing zipped if both exist), and will automatically:
+- Generate files for each vintage according to its appropriate year range
+- Create separate generation, delivery, and total rate JSON files
+- Organize files by year and store comprehensive archives
 
-### NBT Vintage Year Handling:
+The script handles different NBT vintages with appropriate date ranges:
 - **NBT00 (Floating Vintage)**: 2025-2026 only
 - **NBT23**: 2023-2031 (9 years) *
 - **NBT24**: 2024-2032 (9 years) *
 - **NBT25**: 2025-2033 (9 years)
 - **NBT26**: 2026-2034 (9 years)
-- Future vintages can be easily added and mapped to appropriate **9-year periods**.
+- Future vintages can be easily added and mapped to appropriate 9-year periods
 
-\* **Note**: NBT23 and NBT24 only generate files starting from **2024 onward**.
+* Note: NBT23 and NBT24 only generate files from 2024 onward
 
 ## About the Source Data
 
+- **NBT23, NBT24, NBT25, NBT26**: From `PG&E NBT EEC Values [Year] Vintage.csv.zip` files
+- **NBT00**: From `PG&E NBT EEC Values Floating Vintage.csv.zip`
+
 The original source of the PG&E data is available [here](https://www.pge.com/assets/pge/docs/vanities/PGE-Solar-Billing-Plan-Export-Rates.zip).
 
-## Disclaimer
+## Potential Future Features
 
-While every effort has been made to ensure accuracy, this repository is not officially affiliated with PG&E. Always verify rate information with PG&E for critical financial decisions.
+- Support for creating a new Total Feed-in Rate file based on customers of PG&E who use Delivery Export Rate, and whose CCA/DA provider sets its own Generation Export Rate.
+
+## Not Supported
+
+- Net Surplus Compensation Rates are not currently supported. For more information, refer to PG&E's Net Surplus Compensation page and their compensation rate PDF.
+
+## Disclaimer - Use at Your Own Risk
+
+Use this information at your own risk. While every effort has been made to ensure accuracy, this repository is not officially affiliated with PG&E. Always verify rate information with PG&E directly for critical financial decisions.
